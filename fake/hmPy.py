@@ -2,7 +2,7 @@
 
 #--------------------------------------------------------------
 # hmPy 1.9.0.1用 フェイクライブラリ
-# Copyright (c) 2016-2020 Akitsugu Komiyama
+# Copyright (c) 2016-2021 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
 import os
