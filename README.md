@@ -1,4 +1,4 @@
-# hmPython3
+# hmPy
 
 ![hmPy v1.9.2](https://img.shields.io/badge/hmPy-v1.9.2-6479ff.svg)
 [![Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg?style=flat)](LICENSE)
