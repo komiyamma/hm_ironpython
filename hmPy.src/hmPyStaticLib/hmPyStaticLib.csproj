@@ -75,6 +75,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HmOriginalDecodeFunc.cs" />
     <Compile Include="HmOriginalEncodeFunc.cs" />
     <Compile Include="HmOriginalEncodeMap.cs" />
     <Compile Include="hmPSHidemaruOutputPane.cs" />
