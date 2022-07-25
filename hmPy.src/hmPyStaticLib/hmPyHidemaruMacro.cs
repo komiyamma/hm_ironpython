@@ -503,15 +503,7 @@ public sealed partial class hmPyDynamicLib
 
                 if (result.Error == null)
                 {
-                    if (macro_result <= 0)
-                    {
-                        result.Error = new InvalidOperationException("HidemaruMacroResultZeroException");
-                        result.Result = macro_result;
-                    }
-                    else
-                    {
-                        result.Result = macro_result;
-                    }
+                    result.Result = macro_result;
                 }
                 tmpVar = null; // クリア
 
