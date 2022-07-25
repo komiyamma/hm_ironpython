@@ -1,7 +1,7 @@
 # coding: utf-8
 
 #--------------------------------------------------------------
-# hmPy 1.9.0.1用 フェイクライブラリ
+# hmPy 1.9.3.4用 フェイクライブラリ
 # Copyright (c) 2016-2021 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
@@ -27,10 +27,10 @@ class _TFile:
                 self.FilePath = filepath
             except:
                 raise
-        
+
         def __enter__(self):
             return self
-            
+
         # 開いたファイルのテキストの取得
         def Read(self):
             try:
@@ -55,7 +55,7 @@ class _TFile:
     # 編集中のテキスト全体
     def Open(self, filepath, hm_encode=-1):
         return _TFile._TStreamReader(filepath, hm_encode)
-    
+
     def GetEncoding(self, filepath):
         try:
             if not os.path.exists(filepath):
@@ -65,7 +65,7 @@ class _TFile:
             return _TText._TEncoding(encoding_name, codepage, hm_encode)
         except:
             raise
-    
+
 
 class _TEdit:
 
@@ -177,7 +177,7 @@ class _TMacro:
                 hm.debuginfo("cant set attribute: フェイクデータ構築とみなします。本来のhmPyではこの代入は認められません。")
 
             self.__map[varname] = value
-            
+
     #--------------------------------------------------
 
     #--------------------------------------------------
@@ -213,7 +213,7 @@ class _TOutputPane:
     # アウトプットパネルへの出力
     def Output(self, message):
         return 1
-            
+
     # アウトプット枠情報の一時退避
     def Push(self):
         return 1
