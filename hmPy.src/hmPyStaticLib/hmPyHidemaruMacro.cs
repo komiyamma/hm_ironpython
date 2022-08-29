@@ -568,8 +568,6 @@ public sealed partial class hmPyDynamicLib
                     }
                 }
 
-                System.Diagnostics.Trace.WriteLine(result.Result);
-                System.Diagnostics.Trace.WriteLine(result.Args);
                 return new TStatementResult(result.Result, result.Message, result.Error, result.Args); ;
             }
 
