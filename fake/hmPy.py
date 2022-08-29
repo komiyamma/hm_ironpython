@@ -1,8 +1,8 @@
 # coding: utf-8
 
 #--------------------------------------------------------------
-# hmPy 1.9.3.4用 フェイクライブラリ
-# Copyright (c) 2016-2021 Akitsugu Komiyama
+# hmPy 2.0.0.1用 フェイクライブラリ
+# Copyright (c) 2016-2022 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
 import os

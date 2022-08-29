@@ -1,5 +1,5 @@
 #-------------------- coding: utf-8 ---------------------------
-# hmPython3 1.9.3.5用 ライブラリ
+# hmPython3 2.0.0.1用 ライブラリ
 # Copyright (c) 2016-2022 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
@@ -410,12 +410,7 @@ def INSERTFILE(*args): return _method_proxy("INSERTFILE", "st", *args);
 def OPENFILEPART(*args): return _method_proxy("OPENFILEPART", "st", *args);
 def deletefile(*args): return _method_proxy("deletefile", "st", *args);
 def propertydialog(*args): return _method_proxy("propertydialog", "st", *args);
-# def exit(*args): return _method_proxy("exit", "st", *args);
-# def exitall(*args): return _method_proxy("exitall", "st", *args);
-# def saveexit(*args): return _method_proxy("saveexit", "st", *args);
-# def saveexitall(*args): return _method_proxy("saveexitall", "st", *args);
-# def quit(*args): return _method_proxy("quit", "st", *args);
-# def quitall(*args): return _method_proxy("quitall", "st", *args);
+
 def up(*args): return _method_proxy("up", "st", *args);
 def down(*args): return _method_proxy("down", "st", *args);
 def right(*args): return _method_proxy("right", "st", *args);
@@ -751,7 +746,6 @@ def menuarray(*args): return menu(*(args[0]));
 # 配列展開
 def mousemenuarray(*args): return mousemenu(*(args[0]));
 
-
 def message(*args): return _method_proxy("message", "fn1s2s", *args);
 
 def insert(*args): return _method_proxy("insert", "st1s", *args);
@@ -767,7 +761,6 @@ def replaceup(*args): return _method_proxy("replaceup", "st1s", *args);
 def question(*args): return _method_proxy("question", "st1s", *args);
 def setclipboard(*args): return _method_proxy("setclipboard", "st1s", *args);
 def addclipboard(*args): return _method_proxy("addclipboard", "st1s", *args);
-
 
 def replacedialog(*args): return _method_proxy("replacedialog", "st1s2s", *args);
 def replacedown(*args): return _method_proxy("replacedown", "st1s2s", *args);
