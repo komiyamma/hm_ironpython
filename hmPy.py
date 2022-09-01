@@ -1,5 +1,5 @@
 #-------------------- coding: utf-8 ---------------------------
-# hmPython3 2.0.0.1用 ライブラリ
+# hmPython3 2.0.0.4用 ライブラリ
 # Copyright (c) 2016-2022 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
@@ -331,6 +331,10 @@ def gettitle(*args): return _method_proxy("gettitle", "fs", *args);
 def browsefile(*args): return _method_proxy("browsefile", "fs", *args);
 def quote(*args): return _method_proxy("quote", "fs", *args);
 def strreplace(*args): return _method_proxy("strreplace", "fs", *args);
+# jsmodeには無いがpythonには必要
+def encodeuri(*args)->str: return _method_proxy("encodeuri", "fs", *args);
+def decodeuri(*args)->str: return _method_proxy("decodeuri", "fs", *args);
+
 # ２つの値を返す
 def enumregvalue(*args):
     ret = hm.Macro.Function("enumregvalue", *args)
@@ -369,7 +373,6 @@ def getinistrw(*args): return _method_proxy("getinistrw", "fs", *args);
 def getregbinary(*args): return _method_proxy("getregbinary", "fs", *args);
 def getregstr(*args): return _method_proxy("getregstr", "fs", *args);
 def enumregkey(*args): return _method_proxy("enumregkey", "fs", *args);
-def enumregvalue(*args): return _method_proxy("enumregvalue", "fs", *args);
 def gettabstop(*args): return _method_proxy("gettabstop", "fs", *args);
 def getstaticvariable(*args): return _method_proxy("getstaticvariable", "fs", *args);
 def getclipboard(*args): return _method_proxy("getclipboard", "fs", *args);
@@ -770,7 +773,10 @@ def replaceup(*args): return _method_proxy("replaceup", "st1s2s", *args);
 class _GetResultExFunction:
 
     def __call__(self, *args):
-        return _method_proxy("getresultex", "fsn", *args);
+        if (args[0] == -1):
+            return self.rstr(*args)
+        else:
+            return _method_proxy("getresultex", "fsn", *args);
 
     def rnum(self, *args):
         hm.Macro.Var["#__getresultex_rnum_arg0__"] = args[0];
@@ -795,7 +801,10 @@ getresultex = _GetResultExFunction();
 class _GetEventParamFunction:
 
     def __call__(self, *args):
-        return _method_proxy("geteventparam", "fsn", *args);
+        if args[0] == 0 and hm.Macro.Var["event"] == 9:
+            return self.rstr(*args)
+        else:
+            return _method_proxy("geteventparam", "fsn", *args);
 
     def rnum(self, *args):
         hm.Macro.Var["#__geteventparam_rnum_arg0__"] = args[0];
