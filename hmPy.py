@@ -1,5 +1,5 @@
 #-------------------- coding: utf-8 ---------------------------
-# hmPython3 2.0.0.4用 ライブラリ
+# hmPython3 2.0.0.5用 ライブラリ
 # Copyright (c) 2016-2022 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
@@ -332,8 +332,8 @@ def browsefile(*args): return _method_proxy("browsefile", "fs", *args);
 def quote(*args): return _method_proxy("quote", "fs", *args);
 def strreplace(*args): return _method_proxy("strreplace", "fs", *args);
 # jsmodeには無いがpythonには必要
-def encodeuri(*args)->str: return _method_proxy("encodeuri", "fs", *args);
-def decodeuri(*args)->str: return _method_proxy("decodeuri", "fs", *args);
+def encodeuri(*args): return _method_proxy("encodeuri", "fs", *args);
+def decodeuri(*args): return _method_proxy("decodeuri", "fs", *args);
 
 # ２つの値を返す
 def enumregvalue(*args):
