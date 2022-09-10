@@ -79,6 +79,7 @@
     <Compile Include="HmOriginalEncodeFunc.cs" />
     <Compile Include="HmOriginalEncodeMap.cs" />
     <Compile Include="hmPSHidemaruOutputPane.cs" />
+    <Compile Include="hmPyHGlobalToString.cs" />
     <Compile Include="hmPyHidemaru.cs" />
     <Compile Include="hmPyHidemaruDelegate.cs" />
     <Compile Include="hmPyHidemaruExplorerPane.cs" />
