@@ -129,6 +129,8 @@ Class hmPyDynamicLib+Hidemaru+Macro: AutoLayout, AnsiClass, Class, NestedPublic,
     Boolean IsExecuting 'get ' : 
   Methods:
     Eval(String): PrivateScope, Public, Static, HideBySig
+    SetStaticVariable(String, String, Int32): PrivateScope, Public, Static, HideBySig
+    GetStaticVariable(String, Int32): PrivateScope, Public, Static, HideBySig
     get_IsExecuting(): PrivateScope, Public, Static, HideBySig, SpecialName
     ExecEval(String): PrivateScope, Public, Static, HideBySig
     Statement(String, Object[]): PrivateScope, Public, Static, HideBySig
