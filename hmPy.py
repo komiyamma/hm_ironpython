@@ -779,8 +779,8 @@ class _GetResultExFunction:
         hm.Macro.Var["#__getresultex_rnum_arg0__"] = args[0];
         eval_ret = hm.Macro.Eval(r'''#__temp_getresultex_rnum__ = getresultex(#__getresultex_rnum_arg0__);''');
         func_ret = hm.Macro.Var["#__temp_getresultex_rnum__"];
-        hm.Macro.Var["#__temp_getresultex_rnum__"];
-        hm.Macro.Var["#__getresultex_rnum_arg0__"] = "";
+        hm.Macro.Var["#__temp_getresultex_rnum__"] = 0;
+        hm.Macro.Var["#__getresultex_rnum_arg0__"] = 0;
         return func_ret
         
     def rstr(self, *args):
@@ -788,7 +788,7 @@ class _GetResultExFunction:
         eval_ret = hm.Macro.Eval(r'''$__temp_getresultex_rstr__ = getresultex(#__getresultex_rstr_arg0__);''');
         func_ret = hm.Macro.Var["$__temp_getresultex_rstr__"];
         hm.Macro.Var["$__temp_getresultex_rstr__"] = "";
-        hm.Macro.Var["#__getresultex_rstr_arg0__"] = "";
+        hm.Macro.Var["#__getresultex_rstr_arg0__"] = 0;
         return func_ret
 
 # getresultex
@@ -807,7 +807,7 @@ class _GetEventParamFunction:
         hm.Macro.Var["#__geteventparam_rnum_arg0__"] = args[0];
         eval_ret = hm.Macro.Eval(r'''#__temp_geteventparam_rnum__ = geteventparam(#__geteventparam_rnum_arg0__);''');
         func_ret = hm.Macro.Var["#__temp_geteventparam_rnum__"];
-        hm.Macro.Var["#__temp_geteventparam_rnum__"];
+        hm.Macro.Var["#__temp_geteventparam_rnum__"] = 0;
         hm.Macro.Var["#__geteventparam_rnum_arg0__"] = 0;
         return func_ret
         
@@ -816,7 +816,7 @@ class _GetEventParamFunction:
         eval_ret = hm.Macro.Eval(r'''$__temp_geteventparam_rstr__ = geteventparam(#__geteventparam_rstr_arg0__);''');
         func_ret = hm.Macro.Var["$__temp_geteventparam_rstr__"];
         hm.Macro.Var["$__temp_geteventparam_rstr__"] = "";
-        hm.Macro.Var["#__geteventparam_rstr_arg0__"] = "";
+        hm.Macro.Var["#__geteventparam_rstr_arg0__"] = 0;
         return func_ret
 
 # geteventparam
@@ -832,7 +832,7 @@ class _GetConfigFunction:
         hm.Macro.Var["$__getconfig_rnum_arg0__"] = args[0];
         eval_ret = hm.Macro.Eval(r'''#__temp_getconfig_rnum__ = getconfig($__getconfig_rnum_arg0__);''');
         func_ret = hm.Macro.Var["#__temp_getconfig_rnum__"];
-        hm.Macro.Var["#__temp_getconfig_rnum__"];
+        hm.Macro.Var["#__temp_getconfig_rnum__"] = 0;
         hm.Macro.Var["$__getconfig_rnum_arg0__"] = "";
         return func_ret
         
