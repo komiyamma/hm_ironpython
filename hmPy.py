@@ -4,6 +4,105 @@
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
 
+# 秀丸マクロで用いられる特定の関数でのみ使用可能なフラグ値。主に検索・置換・Grep系、そしてエンコード系。
+class _TFlags:
+
+    # openfile等のencode相当
+    class Encode:
+        Sjis = 0x01;
+        Utf16 = 0x02;
+        Euc = 0x03;
+        Jis = 0x04;
+        Utf7 = 0x05;
+        Utf8 = 0x06;
+        Utf16_be = 0x07;
+        Euro = 0x08;
+        Gb2312 = 0x09;
+        Big5 = 0x0a;
+        Euckr = 0x0b;
+        Johab = 0x0c;
+        Easteuro = 0x0d;
+        Baltic = 0x0e;
+        Greek = 0x0f;
+        Russian = 0x10;
+        Symbol = 0x11;
+        Turkish = 0x12;
+        Hebrew = 0x13;
+        Arabic = 0x14;
+        Thai = 0x15;
+        Vietnamese = 0x16;
+        Mac = 0x17;
+        Oem = 0x18;
+        Default = 0x19;
+        Utf32 = 0x1b;
+        Utf32_be = 0x1c;
+        Binary = 0x1a;
+        LF = 0x40;
+        CR = 0x80;
+
+        # SAVEASの他のオプションの数値指定
+        Bom = 0x0600;
+        NoBom = 0x0400;
+        Selection = 0x2000;
+
+        # OPENFILEの他のオプションの数値指定
+        NoAddHist = 0x0100;
+        WS = 0x0800;
+        WB = 0x1000;
+
+    # searchoption(検索関係)
+    class SearchOption:
+        # searchoption(検索関係)
+        Word = 0x00000001;
+        Casesense = 0x00000002;
+        NoCasesense = 0x00000000;
+        Regular = 0x00000010;
+        NoRegular = 0x00000000;
+        Fuzzy = 0x00000020;
+        Hilight = 0x00003800;
+        NoHilight = 0x00002000;
+        LinkNext = 0x00000080;
+        Loop = 0x01000000;
+
+        # searchoption(マスク関係)
+        MaskComment = 0x00020000;
+        MaskIfdef = 0x00040000;
+        MaskNormal = 0x00010000;
+        MaskScript = 0x00080000;
+        MaskString = 0x00100000;
+        MaskTag = 0x00200000;
+        MaskOnly = 0x00400000;
+        FEnableMaskFlags = 0x00800000;
+
+        # searchoption(置換関係)
+        FEnableReplace = 0x00000004;
+        Ask = 0x00000008;
+        NoClose = 0x02000000;
+
+        # searchoption(grep関係)
+        SubDir = 0x00000100;
+        Icon = 0x00000200;
+        Filelist = 0x00000040;
+        FullPath = 0x00000400;
+        OutputSingle = 0x10000000;
+        OutputSameTab = 0x20000000;
+
+        # searchoption(grepして置換関係)
+        BackUp = 0x04000000;
+        Preview = 0x08000000;
+
+        FEnableSearchOption2 = 0x80000000
+
+    # searchoption(検索関係拡張)
+    class SearchOption2:
+        UnMatch = 0x00000001;
+        InColorMarker = 0x00000002;
+        FGrepFormColumn = 0x00000008;
+        FGrepFormHitOnly = 0x00000010;
+        FGrepFormSortDate = 0x00000020;
+
+hm.Macro.Flags = _TFlags()
+
 
 # 非公開
 def _method_proxy(name, t, *args):
@@ -253,7 +352,6 @@ def dllfunc(*args): return _method_proxy("dllfunc", "fn", *args);
 def dllfuncw(*args): return _method_proxy("dllfuncw", "fn", *args);
 def dllfuncexist(*args): return _method_proxy("dllfuncexist", "fn", *args);
 def createobject(*args): return _method_proxy("createobject", "fn", *args);
-# def member_rnum(*args): return _method_proxy("member_rnum", "fn", *args);
 
 def findmarker(*args): return _method_proxy("findmarker", "fs", *args);
 def diff(*args): return _method_proxy("diff", "fs", *args);
@@ -652,6 +750,7 @@ def browsemodeswitch(*args): return _method_proxy("browsemodeswitch", "st", *arg
 def clist(*args): return _method_proxy("clist", "st", *args);
 def clearupdated(*args): return _method_proxy("clearupdated", "st", *args);
 def refreshtabstop(*args): return _method_proxy("refreshtabstop", "st", *args);
+def refreshtabstop_pause(*args): return _method_proxy("refreshtabstop_pause", "st", *args);
 def refreshtabstop_shrink(*args): return _method_proxy("refreshtabstop_shrink", "st", *args);
 def refreshtabstop_current(*args): return _method_proxy("refreshtabstop_current", "st", *args);
 def autospellcheckswitch(*args): return _method_proxy("autospellcheckswitch", "st", *args);
@@ -687,6 +786,7 @@ def runex(*args): return _method_proxy("runex", "st", *args);
 def disabledraw(*args): return _method_proxy("disabledraw", "st", *args);
 def enabledraw(*args): return _method_proxy("enabledraw", "st", *args);
 def disabledraw2(*args): return _method_proxy("disabledraw2", "st", *args);
+def enablebreak(*args): return _method_proxy("enablebreak", "st", *args);
 def disablebreak(*args): return _method_proxy("disablebreak", "st", *args);
 def disableinvert(*args): return _method_proxy("disableinvert", "st", *args);
 def enableinvert(*args): return _method_proxy("enableinvert", "st", *args);
@@ -856,9 +956,6 @@ getconfig = _GetConfigFunction();
 
 # 返り値の型が分岐するもの
 class _MemberFunction:
-
-    def __call__(self, *args):
-        return _method_proxy("member", "fsn", *args);
 
     def rnum(self, *args):
         arg_name_list = []
