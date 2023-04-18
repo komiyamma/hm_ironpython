@@ -1,7 +1,7 @@
 # coding: utf-8
 
 #--------------------------------------------------------------
-# hmPy 2.0.0.5用 フェイクライブラリ
+# hmPy 2.0.1.4用 フェイクライブラリ
 # Copyright (c) 2016-2022 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
@@ -751,6 +751,12 @@ def getlinecount(*args):
     ret = hm.Macro.Function("getlinecount", *args)
     return ret.Result, ret.Args[2];
 
+# 分岐あり
+def hidemaruversion(*args):
+    if len(args)>=1 and (type(args[0]) is str):
+        return _method_proxy("hidemaruversion", "st", *args)
+    else:
+        return _method_proxy("hidemaruversion", "fs", *args)
 
 # 分岐あり
 def toupper(*args):
