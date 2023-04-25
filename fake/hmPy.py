@@ -654,6 +654,10 @@ def dllfunc(*args): return _method_proxy("dllfunc", "fn", *args);
 def dllfuncw(*args): return _method_proxy("dllfuncw", "fn", *args);
 def dllfuncexist(*args): return _method_proxy("dllfuncexist", "fn", *args);
 def createobject(*args): return _method_proxy("createobject", "fn", *args);
+def browserpanehandle(*args): return _method_proxy("browserpanehandle", "fn", *args);
+def browserpanesize(*args): return _method_proxy("browserpanesize", "fn", *args);
+def keyhook(*args): return _method_proxy("keyhook", "fn", *args);
+def registercallback(*args): return _method_proxy("registercallback", "fn", *args);
 
 def findmarker(*args): return _method_proxy("findmarker", "fs", *args);
 def diff(*args): return _method_proxy("diff", "fs", *args);
@@ -791,6 +795,10 @@ def getclipboard(*args): return _method_proxy("getclipboard", "fs", *args);
 def dllfuncstr(*args): return _method_proxy("dllfuncstr", "fs", *args);
 def dllfuncstrw(*args): return _method_proxy("dllfuncstrw", "fs", *args);
 def getloaddllfile(*args): return _method_proxy("getloaddllfile", "fs", *args);
+def browserpaneurl(*args): return _method_proxy("browserpaneurl", "fs", *args);
+def browserpanecommand(*args): return _method_proxy("browserpanecommand", "fs", *args);
+def renderpanecommand(*args): return _method_proxy("renderpanecommand", "fs", *args);
+def getselectedrange(*args): return _method_proxy("getselectedrange", "fs", *args);
 
 def refreshdatetime(*args): return _method_proxy("refreshdatetime", "st", *args);
 def newfile(*args): return _method_proxy("newfile", "st", *args);
@@ -1157,6 +1165,13 @@ def keepdll(*args): return _method_proxy("keepdll", "st", *args);
 def setcomdetachmethod(*args): return _method_proxy("setcomdetachmethod", "st", *args);
 def keepobject(*args): return _method_proxy("keepobject", "st", *args);
 def releaseobject(*args): return _method_proxy("releaseobject", "st", *args);
+def showbrowserpane(*args): return _method_proxy("showbrowserpane", "st", *args);
+def refreshbrowserpane(*args): return _method_proxy("refreshbrowserpane", "st", *args);
+def setbrowserpanesize(*args): return _method_proxy("setbrowserpanesize", "st", *args);
+def setbrowserpaneurl(*args): return _method_proxy("setbrowserpaneurl", "st", *args);
+def setbrowserpanetarget(*args): return _method_proxy("setbrowserpanetarget", "st", *args);
+def setselectionrange(*args): return _method_proxy("setselectionrange", "st", *args);
+def clearkeyhook(*args): return _method_proxy("clearkeyhook", "st", *args);
 
 # 配列展開
 def menuarray(*args): return menu(*(args[0]));
@@ -1214,6 +1229,8 @@ class _GetEventParamFunction:
 
     def __call__(self, *args):
         if args[0] == 0 and hm.Macro.Var["event"] == 9:
+            return self.rstr(*args)
+        elif args[0] == 0 and hm.Macro.Var["event"] == 10:
             return self.rstr(*args)
         else:
             return _method_proxy("geteventparam", "fsn", *args);
