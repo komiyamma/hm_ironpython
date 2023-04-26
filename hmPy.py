@@ -1,6 +1,6 @@
 #-------------------- coding: utf-8 ---------------------------
-# hmPy 2.0.1.1用 ライブラリ
-# Copyright (c) 2016-2022 Akitsugu Komiyama
+# hmPy 2.0.2.1用 ライブラリ
+# Copyright (c) 2016-2023 Akitsugu Komiyama
 # under the Apache License Version 2.0
 #--------------------------------------------------------------
 
@@ -172,6 +172,8 @@ def marked(*args): return _method_proxy("marked", "fn", *args);
 def lineupdated(*args): return _method_proxy("lineupdated", "fn", *args);
 def xpixel(*args): return _method_proxy("xpixel", "fn", *args);
 def ypixel(*args): return _method_proxy("ypixel", "fn", *args);
+def xpixel2(*args): return _method_proxy("xpixel2", "fn", *args);
+def ypixel2(*args): return _method_proxy("ypixel2", "fn", *args);
 def prevposx(*args): return _method_proxy("prevposx", "fn", *args);
 def prevposy(*args): return _method_proxy("prevposy", "fn", *args);
 def lastupdatedx(*args): return _method_proxy("lastupdatedx", "fn", *args);
