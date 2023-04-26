@@ -27,3 +27,7 @@ G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\obj\Release\hmPyStaticLib.net
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\hmPyStaticLib.netmodule.config
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\hmPyStaticLib.netmodule
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\obj\Release\hmPyStaticLib.csproj.CopyComplete
+G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\IronPython.dll
+G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\IronPython.Modules.dll
+G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\Microsoft.Dynamic.dll
+G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\Microsoft.Scripting.dll

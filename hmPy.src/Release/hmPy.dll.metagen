@@ -125,6 +125,7 @@ Class hmPyDynamicLib+Hidemaru+Macro: AutoLayout, AnsiClass, Class, NestedPublic,
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     TMacroVar Var : Public, Static
+    System.Object Flags : Public, Static
   Properties:
     Boolean IsExecuting 'get ' : 
   Methods:
