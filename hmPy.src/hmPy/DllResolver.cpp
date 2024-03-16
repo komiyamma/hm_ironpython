@@ -12,7 +12,15 @@ using namespace System;
 using namespace System::Reflection;
 using namespace System::Xml;
 
+ref class IronPythonFolder {
+public:
+	static String^ ironpythonfolder;
+};
+
 String^ GetIronPythonFolder() {
+	if (IronPythonFolder::ironpythonfolder != nullptr) {
+		return IronPythonFolder::ironpythonfolder;
+	}
 	try {
 		String^ dll_path = Assembly::GetExecutingAssembly()->Location;
 
@@ -33,6 +41,7 @@ String^ GetIronPythonFolder() {
 				String^ ironpythonmoduledll_path = System::IO::Path::Combine(path, "IronPython.Modules.dll");
 				String^ ikvmreflectiondll_path = System::IO::Path::Combine(path, "IKVM.Reflection.dll");
 				if (System::IO::File::Exists(ironpythondll_path) && System::IO::File::Exists(ironpythonmoduledll_path) && System::IO::File::Exists(ikvmreflectiondll_path)) {
+					IronPythonFolder::ironpythonfolder = path;
 					return path;
 				}
 				else {
