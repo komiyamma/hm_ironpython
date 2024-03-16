@@ -28,13 +28,17 @@ String^ GetIronPythonFolder() {
 		String^ coinfig_path = System::IO::Path::Combine(System::IO::Path::GetDirectoryName(dll_path), "hmPy.config");
 		if (System::IO::File::Exists(coinfig_path) == false) {
 			String^ errmsg = coinfig_path + L" ファイルが発見できません。\n";
-			std::wstring native_path = String_to_tstring(errmsg);
 			throw gcnew System::IO::FileNotFoundException(errmsg);
 		}
+
 		doc->Load(coinfig_path); // XMLファイルのパスを指定
 		XmlNode^ node = doc->SelectSingleNode("//add[@key='IronPythonFolder']");
-		if (node != nullptr)
-		{
+
+		if (node == nullptr) {
+			String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n";
+			throw gcnew System::Xml::XmlException(err);
+		}
+		else {
 			String^ path = node->Attributes["value"]->Value;
 			if (System::IO::Directory::Exists(path)) {
 				String^ ironpythondll_path = System::IO::Path::Combine(path, "IronPython.dll");
@@ -46,23 +50,22 @@ String^ GetIronPythonFolder() {
 				}
 				else {
 					String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n" + L"「" + path + L"」というフォルダはIronPythonのフォルダーではありません。\n";
-					std::wstring err_native = String_to_tstring(err);
-					MessageBox(NULL, err_native.c_str(), L"エラー", NULL);
+					throw gcnew System::IO::DirectoryNotFoundException(err);
 				}
 			}
 			else {
 				String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n" + L"「" + path + L"」というフォルダは存在しません。\n";
-				std::wstring err_native = String_to_tstring(err);
-				MessageBox(NULL, err_native.c_str(), L"エラー", NULL);
+				throw gcnew System::Xml::XmlException(err);
 			}
 		}
-		MessageBox(NULL, L"hmPy.configファイルが適切ではありません。", L"エラー", NULL);
-		throw;
+		throw gcnew System::Xml::XmlException(L"hmPy.configファイルのIronPythonFolderが適切ではありません。");
 	} catch(Exception^ e) {
 		System::Diagnostics::Trace::WriteLine(e->Message);
-		throw;
+		std::wstring err_native = String_to_tstring(e->Message);
+		MessageBox(NULL, err_native.c_str(), L"エラー", NULL);
 	}
 
+	return nullptr;
 }
 
 static Assembly^ CurrentDomain_AssemblyResolve(Object^ sender, ResolveEventArgs^ args) {
