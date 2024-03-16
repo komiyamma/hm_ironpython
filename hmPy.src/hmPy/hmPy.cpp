@@ -162,9 +162,23 @@ MACRO_DLL intHM_t SetStrItemOfDict(const TCHAR *sz_arr_name, const TCHAR *key, c
 	return (intHM_t)IPyStaticLib::SetStrItemOfDict(gcnew String(sz_arr_name), gcnew String(key), gcnew String(value));
 }
 //------------------------------------------------------------------------------------
+extern String^ GetIronPythonFolder();
 
 
 MACRO_DLL intHM_t DoString(const TCHAR *szexpression) {
+	String^ ipyfolder = nullptr;
+	try {
+		ipyfolder = GetIronPythonFolder();
+		if (ipyfolder == nullptr) {
+			return (intHM_t)0;
+		}
+	}
+	catch (Exception^ e) {
+		System::Diagnostics::Trace::WriteLine(e->Message);
+		MessageBox(NULL, String_to_tstring(e->Message).c_str(), L"エラー", NULL);
+		return (intHM_t)0;
+	}
+
 	BindDllHandle();
 
 	// ここはよく間違えるのでここだけチェック。他は秀丸8.66以降ではほとんど利用しないので無視
@@ -184,6 +198,19 @@ MACRO_DLL intHM_t DoString(const TCHAR *szexpression) {
 }
 
 MACRO_DLL intHM_t DoFile(const TCHAR *szfilename) {
+	String^ ipyfolder = nullptr;
+	try {
+		ipyfolder = GetIronPythonFolder();
+		if (ipyfolder == nullptr) {
+			return (intHM_t)0;
+		}
+	}
+	catch (Exception^ e) {
+		System::Diagnostics::Trace::WriteLine(e->Message);
+		MessageBox(NULL, String_to_tstring(e->Message).c_str(), L"エラー", NULL);
+		return (intHM_t)0;
+	}
+
 	BindDllHandle();
 
 	// ここはよく間違えるのでここだけチェック。他は秀丸8.66以降ではほとんど利用しないので無視
@@ -203,6 +230,19 @@ MACRO_DLL intHM_t DoFile(const TCHAR *szfilename) {
 }
 
 MACRO_DLL intHM_t DestroyScope() {
+	String^ ipyfolder = nullptr;
+	try {
+		ipyfolder = GetIronPythonFolder();
+		if (ipyfolder == nullptr) {
+			return (intHM_t)0;
+		}
+	}
+	catch (Exception^ e) {
+		System::Diagnostics::Trace::WriteLine(e->Message);
+		MessageBox(NULL, String_to_tstring(e->Message).c_str(), L"エラー", NULL);
+		return (intHM_t)0;
+	}
+
 	return (intHM_t)IPyStaticLib::DestroyScope();
 }
 

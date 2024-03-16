@@ -18,13 +18,28 @@ String^ GetIronPythonFolder() {
 
 		XmlDocument^ doc = gcnew XmlDocument();
 		String^ coinfig_path = System::IO::Path::Combine(System::IO::Path::GetDirectoryName(dll_path), "hmPy.config");
+		if (System::IO::File::Exists(coinfig_path) == false) {
+			String^ errmsg = coinfig_path + L" ファイルが発見できません。\n";
+			std::wstring native_path = String_to_tstring(errmsg);
+			throw gcnew System::IO::FileNotFoundException(errmsg);
+		}
 		doc->Load(coinfig_path); // XMLファイルのパスを指定
 		XmlNode^ node = doc->SelectSingleNode("//add[@key='IronPythonFolder']");
 		if (node != nullptr)
 		{
 			String^ path = node->Attributes["value"]->Value;
 			if (System::IO::Directory::Exists(path)) {
-				return path;
+				String^ ironpythondll_path = System::IO::Path::Combine(path, "IronPython.dll");
+				String^ ironpythonmoduledll_path = System::IO::Path::Combine(path, "IronPython.Modules.dll");
+				String^ ikvmreflectiondll_path = System::IO::Path::Combine(path, "IKVM.Reflection.dll");
+				if (System::IO::File::Exists(ironpythondll_path) && System::IO::File::Exists(ironpythonmoduledll_path) && System::IO::File::Exists(ikvmreflectiondll_path)) {
+					return path;
+				}
+				else {
+					String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n" + L"「" + path + L"」というフォルダはIronPythonのフォルダーではありません。\n";
+					std::wstring err_native = String_to_tstring(err);
+					MessageBox(NULL, err_native.c_str(), L"エラー", NULL);
+				}
 			}
 			else {
 				String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n" + L"「" + path + L"」というフォルダは存在しません。\n";
