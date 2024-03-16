@@ -280,13 +280,15 @@ public sealed partial class hmPyDynamicLib
             String assemblyFile = typeof(IronPython.Hosting.Python).Assembly.Location;
 
             ICollection<String> paths = pe.GetSearchPaths();
-            System.Diagnostics.Trace.WriteLine("IronPython.dllのパス" + assemblyFile);
             if (!String.IsNullOrWhiteSpace(assemblyFile))
             {
                 string dir = System.IO.Path.GetDirectoryName(assemblyFile);
                 string libdir = System.IO.Path.Combine(dir, "Lib");
-                paths.Add(libdir);
-                pe.SetSearchPaths(paths);
+                if (System.IO.Directory.Exists(libdir))
+                {
+                    paths.Add(libdir);
+                    pe.SetSearchPaths(paths);
+                }
             }
         } catch(Exception e)
         {
