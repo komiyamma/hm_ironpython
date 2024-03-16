@@ -31,3 +31,9 @@ G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\IronPython.dll
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\IronPython.Modules.dll
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\Microsoft.Dynamic.dll
 G:\repogitory\hm_ironpython\hmPy.src\hmPYStaticLib\bin\Release\Microsoft.Scripting.dll
+C:\hmPy\hmPy.src\hmPYStaticLib\obj\Release\hmPyStaticLib.csproj.AssemblyReference.cache
+C:\hmPy\hmPy.src\hmPYStaticLib\obj\Release\hmPyStaticLib.csproj.CoreCompileInputs.cache
+C:\hmPy\hmPy.src\hmPYStaticLib\bin\Release\hmPyStaticLib.netmodule.config
+C:\hmPy\hmPy.src\hmPYStaticLib\bin\Release\hmPyStaticLib.netmodule
+C:\hmPy\hmPy.src\hmPYStaticLib\obj\Release\hmPyStat.A191F577.Up2Date
+C:\hmPy\hmPy.src\hmPYStaticLib\obj\Release\hmPyStaticLib.netmodule

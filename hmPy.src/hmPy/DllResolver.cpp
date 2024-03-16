@@ -10,6 +10,37 @@
 
 using namespace System;
 using namespace System::Reflection;
+using namespace System::Xml;
+
+String^ GetIronPythonFolder() {
+	try {
+		String^ dll_path = Assembly::GetExecutingAssembly()->Location;
+
+		XmlDocument^ doc = gcnew XmlDocument();
+		String^ coinfig_path = System::IO::Path::Combine(System::IO::Path::GetDirectoryName(dll_path), "hmPy.config");
+		doc->Load(coinfig_path); // XMLファイルのパスを指定
+		XmlNode^ node = doc->SelectSingleNode("//add[@key='IronPythonFolder']");
+		if (node != nullptr)
+		{
+			String^ path = node->Attributes["value"]->Value;
+			if (System::IO::Directory::Exists(path)) {
+				return path;
+			}
+			else {
+				String^ err = L"hmPy.configファイルのIronPythonFolderが適切ではありません。\n" + L"「" + path + L"」というフォルダは存在しません。\n";
+				std::wstring err_native = String_to_tstring(err);
+				MessageBox(NULL, err_native.c_str(), L"エラー", NULL);
+			}
+		}
+		MessageBox(NULL, L"hmPy.configファイルが適切ではありません。", L"エラー", NULL);
+		throw;
+	} catch(Exception^ e) {
+		System::Diagnostics::Trace::WriteLine(e->Message);
+		throw;
+	}
+
+}
+
 static Assembly^ CurrentDomain_AssemblyResolve(Object^ sender, ResolveEventArgs^ args) {
 
 	try
@@ -19,34 +50,39 @@ static Assembly^ CurrentDomain_AssemblyResolve(Object^ sender, ResolveEventArgs^
 
 		if (requestedAssembly->GetPublicKeyToken()->ToString() != String::Empty) {
 			// IronPython.dllが求められており、なおかつ、Public Key Tokenがちゃんと設定されている。
-			auto targetName = requestedAssembly->Name->ToUpper();
+			auto targetName = requestedAssembly->Name;
+			String^ path = GetIronPythonFolder();
+			if (path != nullptr) {
+				String^ targetfullpath = System::IO::Path::Combine(path,requestedAssembly->Name + L".dll");
+				if (System::IO::File::Exists(targetfullpath))
+				{
+					return Assembly::LoadFile(targetfullpath);
+				}
 
-			if (targetName == "IRONPYTHON" || targetName == "IRONPYTHON.MODULES" || targetName == "MICROSOFT.DYNAMIC" || targetName == "MICROSOFT.SCRIPTING" || targetName == "MICROSOFT.SCRIPTING.METADATA") {
-				System::Diagnostics::Trace::WriteLine(args->Name);
+				// そのようなフルパスが指定されている場合(フルパスを指定した書き方)
+				targetfullpath = requestedAssembly->Name;
+				if (System::IO::File::Exists(targetfullpath))
+				{
+					return Assembly::LoadFile(targetfullpath);
+				}
 
-
-				wchar_t message[256] = L"";
-				
-				wsprintf
-					(
-					message,
-					L"http://IronPython.net/" L"から、\n"
-					L"対象のIronPython をインストールしてください。\n"
-					L"「.msiインストーラー」版を利用してください。\n"
-					L"%s",
-					IRONPYTHON_VERSION
-					);
-
-				MessageBox(NULL, message, L"IronPython.dllが見つからない!!", MB_ICONERROR);
+				// Mono.Posix.dllは無視
+				if (args->Name->Contains("Mono.Posix")) {
+					return nullptr;
+				}
+				else {
+					System::Diagnostics::Trace::WriteLine(args->Name + L"は発見できませんでした。");
+				}
 			}
 			else {
-				System::Diagnostics::Trace::WriteLine(args->Name);
+				System::Diagnostics::Trace::WriteLine(args->Name + L"は発見できませんでした。");
 			}
 
 		}
 	}
 	catch (...)
 	{
+		System::Diagnostics::Trace::WriteLine("アセンブリ解決のエラー発生");
 		return nullptr;
 	}
 	return nullptr;

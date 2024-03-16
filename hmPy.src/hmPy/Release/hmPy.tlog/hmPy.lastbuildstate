@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.5:PlatformToolSet=v141:EnableManagedIncrementalBuild=true:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.17763.0
-Release|Win32|G:\repogitory\hm_ironpython\hmPy.src\|
+#TargetFrameworkVersion=v4.8:PlatformToolSet=v141:EnableManagedIncrementalBuild=true:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.17763.0
+Release|Win32|C:\hmPy\hmPy.src\|

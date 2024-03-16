@@ -188,6 +188,7 @@ public sealed partial class hmPyDynamicLib
                 SetTmpVar(value);
                 String cmd = ModifyFuncCallByDllType(
                     "begingroupundo;\n" +
+                    "rangeeditout;\n" +
                     "selectall;\n" +
                     "insert dllfuncstrw( {0} \"PopStrVar\" );\n" +
                     "endgroupundo;\n"

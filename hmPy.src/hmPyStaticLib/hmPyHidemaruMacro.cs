@@ -259,7 +259,7 @@ public sealed partial class hmPyDynamicLib
                             {
                                 List<long> long_list = new List<long>();
                                 List<string> string_list = new List<string>();
-                                IronPython.Runtime.List value_list = (IronPython.Runtime.List)value;
+                                IronPython.Runtime.PythonList value_list = (IronPython.Runtime.PythonList)value;
                                 foreach (var dv in value_list)
                                 {
                                     if (dv is Int32 || dv is Int64 || dv is IntPtr)

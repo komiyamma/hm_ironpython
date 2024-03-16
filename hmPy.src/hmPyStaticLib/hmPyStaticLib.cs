@@ -232,6 +232,9 @@ public sealed partial class hmPyDynamicLib
                 pe.GetBuiltinModule().SetVariable("hm", hm);
                 // ss.SetVariable("hm", hm);
 
+                // Libのパスを足す
+                setIronPythonLibDirectory();
+
                 // マクロのパスを足す
                 SetCurrentMacroDirectory();
 
@@ -253,14 +256,41 @@ public sealed partial class hmPyDynamicLib
     {
         if (Hidemaru.version >= 866)
         {
-            String currentmacrodirectory = (String)Hidemaru.Macro.Var["currentmacrodirectory"];
+            try
+            {
+                String currentmacrodirectory = (String)Hidemaru.Macro.Var["currentmacrodirectory"];
+
+                ICollection<String> paths = pe.GetSearchPaths();
+                if (!String.IsNullOrWhiteSpace(currentmacrodirectory))
+                {
+                    paths.Add(currentmacrodirectory);
+                    pe.SetSearchPaths(paths);
+                }
+            }
+            catch (Exception e)
+            {
+                OutputDebugStream(e.Message);
+            }
+        }
+    }
+
+    private static void setIronPythonLibDirectory()
+    {
+        try {
+            String assemblyFile = typeof(IronPython.Hosting.Python).Assembly.Location;
 
             ICollection<String> paths = pe.GetSearchPaths();
-            if (!String.IsNullOrWhiteSpace(currentmacrodirectory))
+            System.Diagnostics.Trace.WriteLine("IronPython.dllのパス" + assemblyFile);
+            if (!String.IsNullOrWhiteSpace(assemblyFile))
             {
-                paths.Add(currentmacrodirectory);
+                string dir = System.IO.Path.GetDirectoryName(assemblyFile);
+                string libdir = System.IO.Path.Combine(dir, "Lib");
+                paths.Add(libdir);
                 pe.SetSearchPaths(paths);
             }
+        } catch(Exception e)
+        {
+            OutputDebugStream(e.Message);
         }
     }
 
