@@ -259,11 +259,13 @@ public sealed partial class hmPyDynamicLib
             try
             {
                 String currentmacrodirectory = (String)Hidemaru.Macro.Var["currentmacrodirectory"];
+                String macrodir = (String)Hidemaru.Macro.Var["macrodir"];
 
                 ICollection<String> paths = pe.GetSearchPaths();
                 if (!String.IsNullOrWhiteSpace(currentmacrodirectory))
                 {
                     paths.Add(currentmacrodirectory);
+                    paths.Add(macrodir);
                     pe.SetSearchPaths(paths);
                 }
             }
@@ -273,6 +275,7 @@ public sealed partial class hmPyDynamicLib
             }
         }
     }
+
 
     private static void setIronPythonLibDirectory()
     {
