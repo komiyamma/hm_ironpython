@@ -74,8 +74,7 @@ static Assembly^ CurrentDomain_AssemblyResolve(Object^ sender, ResolveEventArgs^
 	{
 		auto requestingAssembly = args->RequestingAssembly;
 		auto requestedAssembly = gcnew AssemblyName(args->Name);
-
-		if (requestedAssembly->GetPublicKeyToken()->ToString() != String::Empty) {
+		if (requestedAssembly != nullptr && requestedAssembly->GetPublicKeyToken()->ToString() != String::Empty) {
 			// IronPython.dllが求められており、なおかつ、Public Key Tokenがちゃんと設定されている。
 			auto targetName = requestedAssembly->Name;
 			String^ path = GetIronPythonFolder();
@@ -107,9 +106,8 @@ static Assembly^ CurrentDomain_AssemblyResolve(Object^ sender, ResolveEventArgs^
 
 		}
 	}
-	catch (...)
+	catch (Exception^ e)
 	{
-		System::Diagnostics::Trace::WriteLine("アセンブリ解決のエラー発生");
 		return nullptr;
 	}
 	return nullptr;
