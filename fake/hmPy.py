@@ -448,6 +448,7 @@ def _method_proxy(name, t, *args):
         return hm.Macro.Statement(name, *list_args).Result
 
 def gettotaltext(*args): return _method_proxy("gettotaltext", "fs0", *args);
+def settotaltext(*args): return _method_proxy("settotaltext", "st1s", *args);
 def getlinetext(*args): return _method_proxy("getlinetext", "fs0", *args);
 def getselectedtext(*args): return _method_proxy("getselectedtext", "fs0", *args);
 
