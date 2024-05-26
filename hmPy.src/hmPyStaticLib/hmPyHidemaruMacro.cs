@@ -22,6 +22,29 @@ public sealed partial class hmPyDynamicLib
                 SetUnManagedDll();
             }
 
+            public static int DebugInfo(params Object[] expressions)
+            {
+                if (pDebugInfo != null)
+                {
+                    List<String> list = new List<String>();
+                    foreach (var exp in expressions)
+                    {
+                        var mixedString = exp.ToString();
+                        string unifiedString = mixedString.Replace("\r\n", "\n").Replace("\n", "\r\n");
+                        list.Add(unifiedString);
+                    }
+
+                    String joind = String.Join(" ", list);
+
+                    return pDebugInfo(joind);
+                }
+                else
+                {
+                    OutputDebugStream(ErrorMsg.MethodNeed898);
+                    throw new MissingMethodException("HidemaruMacroDebugInfoException");
+                }
+            }
+
             // マクロでの問い合わせ結果系
             public interface IResult
             {
