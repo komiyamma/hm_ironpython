@@ -107,6 +107,8 @@ hm.Macro.Flags = _TFlags()
 # 非公開
 def _method_proxy(name, t, *args):
     if t == "fn" or t == "fs":
+        return hm.Macro.Function(name, *args).Result
+    if t == "fnfo":
         count = len(args)
         if (count == 0):
             return hm.Macro.Var[name]
@@ -443,6 +445,7 @@ def browsefile(*args): return _method_proxy("browsefile", "fs", *args);
 def quote(*args): return _method_proxy("quote", "fs", *args);
 def strreplace(*args): return _method_proxy("strreplace", "fs", *args);
 def getimecandidate(*args): return _method_proxy("getimecandidate", "fs", *args);
+def getdpi(): return hm.Macro.Function("getdpi").Result;
 
 # jsmodeには無いがpythonには必要
 def encodeuri(*args): return _method_proxy("encodeuri", "fs", *args);
