@@ -315,7 +315,7 @@ class _TOutputPane:
         return 1
 
     # アウトプット枠情報の一時退避したものを復元
-    def Push(self):
+    def Pop(self):
         return 1
 
     # アウトプット枠のクリア
